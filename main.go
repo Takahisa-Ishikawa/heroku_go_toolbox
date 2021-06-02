@@ -26,7 +26,7 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 
 func handleSecret(w http.ResponseWriter, r *http.Request) {
 	user, password, _ := r.BasicAuth()
-	if user != "user" || password != "password" {
+	if user != os.Getenv("USER") || password != os.Getenv("PASSWORD") {
 		w.Header().Set("WWW-Authenticate", `Basic realm="Restrected"`)
 		http.Error(w, "認証に失敗しました", http.StatusUnauthorized)
 		return
