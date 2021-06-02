@@ -1,0 +1,30 @@
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">The table header</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>The table body</td>
+            <td>with two columns</td>
+        </tr>
+    </tbody>
+</table>
+
+<!DOCTYPE html> 
+<html lang="ja"> 
+
+<head> 
+    <meta charset="UTF-8"> 
+    <title>祝日の一覧</title> 
+</head> 
+
+<body> 
+    <h1>ようこそ {{.UserName}} さん！</h1> 
+    <p>現在時刻は {{.Time.Format "2006/1/2 15:04:05"}} です。</p> 
+</body> 
+
+{{template "menu"}}
+
+</html>

@@ -1,14 +1,25 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%s %s", r.Method, r.RequestURI)
-	w.Write([]byte("こんにちは！"))
+	t := template.Must(template.ParseFiles("template/index.gohtml", "template/_menu.gohtml"))
+	if err := t.Execute(w, struct {
+		UserName string
+		Time     time.Time
+	}{
+		"ゲスト",
+		time.Now(),
+	}); err != nil {
+		log.Printf("テンプレート %s の実行に失敗!: %v", t.Name(), err)
+		http.Error(w, "内部エラーです", http.StatusInternalServerError)
+	}
 }
 
 func handleSecret(w http.ResponseWriter, r *http.Request) {
